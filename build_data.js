@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const baseDir = path.resolve(__dirname);
+const baseDir = fs.existsSync(path.join(__dirname, 'osc'))
+    ? path.resolve(__dirname)
+    : path.resolve(__dirname, '..');
 
 function readFileSafe(filePath) {
     try {
@@ -139,7 +141,9 @@ const oscPrograms = [
         number: 6,
         title: 'Student Registration Web App (Express.js)',
         category: 'Node.js & Express',
-        command: 'npm install express && node server.js',
+        command: 'node server.js',
+        installNote: 'Need to install Node.js and Express.js',
+        installCommand: 'npm install express',
         summary: 'Express web server serving a registration form and handling POST requests to display student details.',
         executionGuide: '1. Run npm install express.\n2. Run node server.js.\n3. Open http://localhost:3000 in browser.\n4. Enter Name, Roll No, Department and click Register to view output.',
         files: [
@@ -166,7 +170,9 @@ const oscPrograms = [
         number: 7,
         title: 'Employee CRUD App (Express & MongoDB)',
         category: 'MERN Stack / MongoDB',
-        command: 'npm install express mongoose && node server.js',
+        command: 'node server.js',
+        installNote: 'Need to install Node.js, Express.js, and Mongoose',
+        installCommand: 'npm install express mongoose',
         summary: 'Full CRUD web application with Express and Mongoose to add, display in a table, and delete employee records.',
         executionGuide: '1. Ensure MongoDB service is running on port 27017 (mongod).\n2. Run npm install express mongoose.\n3. Run node server.js.\n4. Open http://localhost:3000, add employee details, click "View Employees", and test delete functionality.',
         files: [
@@ -391,5 +397,9 @@ const PRACTICAL_DATA = {
 };
 `;
 
-fs.writeFileSync(path.join(baseDir, 'programs-data.js'), fileContent, 'utf-8');
-console.log('Successfully generated programs-data.js!');
+fs.writeFileSync(path.join(__dirname, 'programs-data.js'), fileContent, 'utf-8');
+if (__dirname !== baseDir) {
+    fs.writeFileSync(path.join(baseDir, 'programs-data.js'), fileContent, 'utf-8');
+}
+console.log('Successfully generated programs-data.js in both locations!');
+

@@ -29,6 +29,11 @@
     const codeBlock = document.getElementById('codeBlock');
     const toast = document.getElementById('toast');
 
+    const installBox = document.getElementById('installBox');
+    const installNoteText = document.getElementById('installNoteText');
+    const installCmdText = document.getElementById('installCmdText');
+    const copyInstallBtn = document.getElementById('copyInstallBtn');
+
     let toastTimer = null;
 
     // Initialize
@@ -46,6 +51,7 @@
 
         copyBtn.addEventListener('click', copyCode);
         copyCmdBtn.addEventListener('click', copyCommand);
+        copyInstallBtn.addEventListener('click', copyInstallCommand);
 
         // Load OSC by default
         switchSubject('osc');
@@ -138,6 +144,15 @@
             runBox.style.display = 'none';
         }
 
+        // Installation Note and Command below program
+        if (prgm.installNote) {
+            installNoteText.textContent = prgm.installNote;
+            installCmdText.textContent = prgm.installCommand || '';
+            installBox.style.display = 'flex';
+        } else {
+            installBox.style.display = 'none';
+        }
+
         // Render file tabs if more than 1 file
         renderFileTabs(prgm);
 
@@ -218,6 +233,16 @@
         const success = await writeToClipboard(currentProgram.command);
         if (success) {
             showToast(`✓ Copied command: ${currentProgram.command}`);
+        }
+    }
+
+    // Copy install command
+    async function copyInstallCommand() {
+        if (!currentProgram || !currentProgram.installCommand) return;
+
+        const success = await writeToClipboard(currentProgram.installCommand);
+        if (success) {
+            showToast(`✓ Copied install command: ${currentProgram.installCommand}`);
         }
     }
 
