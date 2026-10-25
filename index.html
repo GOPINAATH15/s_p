@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sem Practical Codes | OSC & Python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-icon">&lt;/&gt;</span>
+            <span class="brand-title">Practical Hub</span>
+        </div>
+
+        <!-- Subject Switcher -->
+        <div class="subject-tabs">
+            <button class="tab-btn active" id="tabOsc">OSC (8 Programs)</button>
+            <button class="tab-btn" id="tabPython">Python (10 Programs)</button>
+        </div>
+
+        <!-- Simple Search -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search program (e.g. BFS, Mongo, Bill)...">
+            <button id="clearSearch" title="Clear search" style="display: none;">×</button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="workspace">
+        <!-- Sidebar: List of Programs -->
+        <aside class="sidebar">
+            <div class="sidebar-title" id="sidebarTitle">OSC Programs (8)</div>
+            <div class="program-list" id="programList">
+                <!-- Injected via JavaScript -->
+            </div>
+        </aside>
+
+        <!-- Code Viewer Area -->
+        <main class="code-area">
+            <!-- Header with Title, File Tabs & Big Copy Button -->
+            <div class="code-header">
+                <div class="header-info">
+                    <h2 class="program-title" id="programTitle">Program 1</h2>
+                    <!-- Multi-file Tabs (if program has more than 1 file) -->
+                    <div class="file-tabs" id="fileTabs" style="display: none;"></div>
+                </div>
+
+                <div class="header-actions">
+                    <button class="copy-btn" id="copyBtn" title="Copy code to clipboard">
+                        <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span id="copyBtnText">Copy Code</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Terminal Run Command -->
+            <div class="run-box" id="runBox">
+                <span class="run-label">Terminal Command:</span>
+                <code id="runCmd">python prgm1.py</code>
+                <button class="copy-cmd-btn" id="copyCmdBtn" title="Copy command">Copy Command</button>
+            </div>
+
+            <!-- Code Editor Box -->
+            <div class="editor-box">
+                <div class="line-numbers" id="lineNumbers">1</div>
+                <pre class="code-pre"><code class="code-block" id="codeBlock"></code></pre>
+            </div>
+        </main>
+    </div>
+
+    <!-- Copied Toast -->
+    <div class="toast" id="toast">✓ Copied to clipboard!</div>
+
+    <script src="programs-data.js?v=3"></script>
+    <script src="app.js?v=3"></script>
+</body>
+</html>
